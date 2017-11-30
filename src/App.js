@@ -4,6 +4,63 @@ import './App.css';
 
 import { Navbar, Jumbotron, Button, Grid, Row, Col } from 'react-bootstrap';
 
+const backendURL = 'https://parking-back-end.herokuapp.com/api/parking';
+
+class ParkingGrid extends Component {
+  render() {
+    return (
+      <Grid>
+        <h1>Sótano 1</h1>
+        <Row className="row">
+          <Col sm={2} md={2} lg={2}>
+            <Button
+              // bsStyle = { (this.state.parkingLots[0].parkingStatus === "AVAILABLE") ? "success" : "danger"}
+              bsStyle="success"
+              bsSize="large"
+              block
+              onClick={() => this.changeStateParkingLot(0, this.state.parkingLots[0]._id, this.state.parkingLots[0].parkingStatus)}
+            >14
+      </Button>
+          </Col >
+          <Col sm={2} md={2} lg={2}>
+            <Button bsStyle="success" bsSize="large" block>15</Button>
+          </Col >
+          <Col sm={2} md={2} lg={2}>
+            <Button bsStyle="success" bsSize="large" block>16</Button>
+          </Col >
+          <Col sm={2} md={2} lg={2}>
+          </Col >
+          <Col sm={2} md={2} lg={2}>
+            <Button bsStyle="success" bsSize="large" block>19</Button>
+          </Col >
+          <Col sm={2} md={2} lg={2}>
+            <Button bsStyle="success" bsSize="large" block>20</Button>
+          </Col >
+        </Row>
+        <Row>
+          <Col sm={2} md={2} lg={2}>
+            <Button bsStyle="success" bsSize="large" block>35</Button>
+          </Col >
+          <Col sm={2} md={2} lg={2}>
+            <Button bsStyle="success" bsSize="large" block>34</Button>
+          </Col >
+          <Col sm={2} md={2} lg={2}>
+            <Button bsStyle="success" bsSize="large" block>33</Button>
+          </Col >
+          <Col sm={2} md={2} lg={2}>
+          </Col >
+          <Col sm={2} md={2} lg={2}>
+            <Button bsStyle="success" bsSize="large" block>30</Button>
+          </Col >
+          <Col sm={2} md={2} lg={2}>
+            <Button bsStyle="success" bsSize="large" block>29</Button>
+          </Col >
+        </Row>
+      </Grid>
+    );
+  }
+}
+
 class App extends Component {
 
   state = {
@@ -16,7 +73,7 @@ class App extends Component {
 
   getParkingLots() {
 
-    fetch('https://parking-back-end.herokuapp.com/api/parking')
+    fetch(backendURL)
       .then((result) => {
         return result.json();
       }).then((parkingLots) => {
@@ -41,7 +98,7 @@ class App extends Component {
 
     console.log(parking);
 
-    fetch('https://parking-back-end.herokuapp.com/api/parking', {
+    fetch(backendURL, {
       method: 'put',
       headers: {
         'Accept': 'application/json',
@@ -78,7 +135,8 @@ class App extends Component {
             <h2>Listado de parqueaderos</h2>
           </Grid>
         </Jumbotron>
-        <Grid>
+        <ParkingGrid />
+        {/* <Grid>
           <h1>Sótano 1</h1>
           <Row className="row">
             <Col sm={2} md={2} lg={2}>
@@ -87,90 +145,90 @@ class App extends Component {
                 bsStyle="success"
                 bsSize="large"
                 block
-                onClick = {() => this.changeStateParkingLot(0, this.state.parkingLots[0]._id, this.state.parkingLots[0].parkingStatus)}
+                onClick={() => this.changeStateParkingLot(0, this.state.parkingLots[0]._id, this.state.parkingLots[0].parkingStatus)}
               >14
               </Button>
             </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>15</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>16</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>19</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>20</Button>
-          </Col >
+            <Col sm={2} md={2} lg={2}>
+              <Button bsStyle="success" bsSize="large" block>15</Button>
+            </Col >
+            <Col sm={2} md={2} lg={2}>
+              <Button bsStyle="success" bsSize="large" block>16</Button>
+            </Col >
+            <Col sm={2} md={2} lg={2}>
+            </Col >
+            <Col sm={2} md={2} lg={2}>
+              <Button bsStyle="success" bsSize="large" block>19</Button>
+            </Col >
+            <Col sm={2} md={2} lg={2}>
+              <Button bsStyle="success" bsSize="large" block>20</Button>
+            </Col >
           </Row>
-        <Row>
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>35</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>34</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>33</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>30</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>29</Button>
-          </Col >
-        </Row>
+          <Row>
+            <Col sm={2} md={2} lg={2}>
+              <Button bsStyle="success" bsSize="large" block>35</Button>
+            </Col >
+            <Col sm={2} md={2} lg={2}>
+              <Button bsStyle="success" bsSize="large" block>34</Button>
+            </Col >
+            <Col sm={2} md={2} lg={2}>
+              <Button bsStyle="success" bsSize="large" block>33</Button>
+            </Col >
+            <Col sm={2} md={2} lg={2}>
+            </Col >
+            <Col sm={2} md={2} lg={2}>
+              <Button bsStyle="success" bsSize="large" block>30</Button>
+            </Col >
+            <Col sm={2} md={2} lg={2}>
+              <Button bsStyle="success" bsSize="large" block>29</Button>
+            </Col >
+          </Row>
+        </Grid> */}
+        <Grid>
+          <h1>Sótano 2</h1>
+          <Row className="row">
+            <Col sm={2} md={2} lg={2}>
+              <Button bsStyle="success" bsSize="large" block>89</Button>
+            </Col >
+            <Col sm={2} md={2} lg={2}>
+            </Col >
+            <Col sm={2} md={2} lg={2}>
+              <Button bsStyle="success" bsSize="large" block>85</Button>
+            </Col >
+            <Col sm={6} md={6} lg={6}>
+            </Col >
+          </Row>
+          <Row>
+            <Col sm={2} md={2} lg={2}>
+              <Button bsStyle="success" bsSize="large" block>130</Button>
+            </Col >
+            <Col sm={10} md={10} lg={10}>
+            </Col >
+          </Row>
         </Grid>
-      <Grid>
-        <h1>Sótano 2</h1>
-        <Row className="row">
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>89</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>85</Button>
-          </Col >
-          <Col sm={6} md={6} lg={6}>
-          </Col >
-        </Row>
-        <Row>
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>130</Button>
-          </Col >
-          <Col sm={10} md={10} lg={10}>
-          </Col >
-        </Row>
-      </Grid>
-      <Grid>
-        <h1>Sótano 3</h1>
-        <Row className="row">
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>259</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>260</Button>
-          </Col >
-          <Col sm={8} md={8} lg={8}>
-          </Col >
-        </Row>
-        <Row>
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>258</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>257</Button>
-          </Col >
-          <Col sm={8} md={8} lg={8}>
-          </Col >
-        </Row>
-      </Grid>
+        <Grid>
+          <h1>Sótano 3</h1>
+          <Row className="row">
+            <Col sm={2} md={2} lg={2}>
+              <Button bsStyle="success" bsSize="large" block>259</Button>
+            </Col >
+            <Col sm={2} md={2} lg={2}>
+              <Button bsStyle="success" bsSize="large" block>260</Button>
+            </Col >
+            <Col sm={8} md={8} lg={8}>
+            </Col >
+          </Row>
+          <Row>
+            <Col sm={2} md={2} lg={2}>
+              <Button bsStyle="success" bsSize="large" block>258</Button>
+            </Col >
+            <Col sm={2} md={2} lg={2}>
+              <Button bsStyle="success" bsSize="large" block>257</Button>
+            </Col >
+            <Col sm={8} md={8} lg={8}>
+            </Col >
+          </Row>
+        </Grid>
       </div >
       // <div className="App">
       //   <header className="App-header">
