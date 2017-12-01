@@ -6,65 +6,28 @@ import { Navbar, Jumbotron, Button, Grid, Row, Col } from 'react-bootstrap';
 
 const backendURL = 'https://parking-back-end.herokuapp.com/api/parking';
 
-class ParkingGrid extends Component {
-  render() {
-    return (
-      <Grid>
-        <h1>Sótano 1</h1>
-        <Row className="row">
-          <Col sm={2} md={2} lg={2}>
-            <Button
-              // bsStyle = { (this.state.parkingLots[0].parkingStatus === "AVAILABLE") ? "success" : "danger"}
-              bsStyle="success"
-              bsSize="large"
-              block
-              onClick={() => this.changeStateParkingLot(0, this.state.parkingLots[0]._id, this.state.parkingLots[0].parkingStatus)}
-            >14
-      </Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>15</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>16</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>19</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>20</Button>
-          </Col >
-        </Row>
-        <Row>
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>35</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>34</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>33</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>30</Button>
-          </Col >
-          <Col sm={2} md={2} lg={2}>
-            <Button bsStyle="success" bsSize="large" block>29</Button>
-          </Col >
-        </Row>
-      </Grid>
-    );
-  }
+// class ParkingLot extends Component() {
+const ParkingLot = (props) => {
+
+  // render() {
+  return (
+    <Button
+      // bsStyle = { (this.state.parkingLots[0].parkingStatus === "AVAILABLE") ? "success" : "danger"}
+      bsStyle="success"
+      bsSize="large"
+      block
+      onClick={() => props.changeStateParkingLot(0, props.id, props.parkingStatus)}
+    > {props.parkingNumber}
+    </Button >
+  );
+  // }
 }
 
 class App extends Component {
 
   state = {
-    parkingLots: []
+    parkingLots: [] 
+    // parkingLots: [{ parkingNumber: 14, _id: '5a1eb35b00f9f000149bd17e', parkingStatus: "NOT_AVAILABLE" }]
   }
 
   componentDidMount() {
@@ -79,6 +42,7 @@ class App extends Component {
       }).then((parkingLots) => {
         this.setState({ parkingLots });
         console.log(parkingLots);
+        console.log('parking0: ' + parkingLots.indexOf(0));
       });
   }
 
@@ -92,11 +56,15 @@ class App extends Component {
       newStatus = "AVAILABLE";
     }
 
-    let parking = this.state.parkingLots;
-    parking[index].parkingStatus = newStatus;
-    this.setState({ parking });
+    // let parking = this.state.parkingLots;
+    // parking[index].parkingStatus = newStatus;
+    // // this.setState({ parking });
 
-    console.log(parking);
+    // this.setState( prevState => {
+    //   parkingLots: parkingLots.fetch.
+    // });
+
+    // console.log(parking);
 
     fetch(backendURL, {
       method: 'put',
@@ -135,19 +103,29 @@ class App extends Component {
             <h2>Listado de parqueaderos</h2>
           </Grid>
         </Jumbotron>
-        <ParkingGrid />
-        {/* <Grid>
+
+        <Grid>
           <h1>Sótano 1</h1>
           <Row className="row">
             <Col sm={2} md={2} lg={2}>
-              <Button
+
+              <ParkingLot
+                parkingNumber={this.state.parkingLots.indexOf(0).parkingNumber}
+                id={this.state.parkingLots.indexOf(0)._id}
+                parkingStatus={this.state.parkingLots.indexOf(0).parkingStatus}
+                changeStateParkingLot={this.changeStateParkingLot}
+              />
+
+              {/* <Button
                 // bsStyle = { (this.state.parkingLots[0].parkingStatus === "AVAILABLE") ? "success" : "danger"}
                 bsStyle="success"
                 bsSize="large"
                 block
                 onClick={() => this.changeStateParkingLot(0, this.state.parkingLots[0]._id, this.state.parkingLots[0].parkingStatus)}
               >14
-              </Button>
+              </Button> */}
+
+
             </Col >
             <Col sm={2} md={2} lg={2}>
               <Button bsStyle="success" bsSize="large" block>15</Button>
@@ -183,7 +161,10 @@ class App extends Component {
               <Button bsStyle="success" bsSize="large" block>29</Button>
             </Col >
           </Row>
-        </Grid> */}
+        </Grid>
+
+
+
         <Grid>
           <h1>Sótano 2</h1>
           <Row className="row">
