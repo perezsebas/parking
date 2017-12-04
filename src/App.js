@@ -1,43 +1,46 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
+import Spinner from './images/Spinner.svg';
 import './App.css';
-
-import { Navbar, Jumbotron, Button, Grid, Row, Col } from 'react-bootstrap';
+import Parking from './components/Parking';
+import { Navbar, Jumbotron, Grid, Row, Col } from 'react-bootstrap';
 
 const backendURL = 'https://parking-back-end.herokuapp.com/api/parking';
-
-const ParkingLot = (props) => {
-
-  const changeColor = (status) => {
-    return (status === "AVAILABLE") ? "success" : "danger";
-  }
-
-  return (
-    <Button
-      bsStyle={changeColor(props.parkingStatus)}
-      bsSize="large"
-      block
-      onClick={() => props.changeStateParkingLot(props.index, props.id, props.parkingStatus)}
-    > {props.parkingNumber}
-    </Button >
-  );
-}
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.changeStateParkingLot = this.changeStateParkingLot.bind(this);
+    this.parkingNumbers = {
+      parking_14: 0,
+      parking_15: 1,
+      parking_16: 2,
+      parking_19: 3,
+      parking_20: 4,
+      parking_29: 5,
+      parking_30: 6,
+      parking_33: 7,
+      parking_34: 8,
+      parking_35: 9,
+      parking_85: 10,
+      parking_89: 11,
+      parking_130: 12,
+      parking_257: 13,
+      parking_258: 14,
+      parking_259: 15,
+      parking_260: 16
+    };
     this.state = {
       parkingLots: []
-      // parkingLots: [
-      //   { parkingNumber: 13434, _id: '5a1eb35b00f9f000149bd17e', parkingStatus: "NOT_AVAILABLE" },
-      //   { parkingNumber: 15534, _id: '"5a1eb3aa00f9f000149bd17f"', parkingStatus: "NOT_AVAILABLE" }
-      // ]
     };
   }
 
   componentWillMount() {
+    this.getParkingLots();
+  }
+
+  getParkingLots() {
 
     fetch(backendURL)
       .then((result) => {
@@ -45,10 +48,7 @@ class App extends Component {
       }).then((parkingLots) => {
         this.setState({ parkingLots });
         console.log(this.state.parkingLots);
-        console.log('parking0: ' + this.state.parkingLots[0]._id);
       });
-
-    console.log(this.state.parkingLots);
   }
 
   changeStateParkingLot(index, id, status) {
@@ -77,13 +77,12 @@ class App extends Component {
         id: id,
         status: newStatus,
       })
+    }).then((result) => {
+      return result.json();
     })
-      .then((result) => {
-        return result.json();
-      })
-      .then((jsonResult) => {
-        console.log(jsonResult);
-      });
+    // .then((jsonResult) => {
+    // console.log(jsonResult);
+    // });
   }
 
   render() {
@@ -93,9 +92,9 @@ class App extends Component {
           <Navbar inverse fixedTop>
             <Grid>
               <Navbar.Header>
-                {/* <Navbar.Brand>
-                <a href="/">Parking Admin</a>
-              </Navbar.Brand> */}
+                <Navbar.Brand>
+                  <a href="/">Admin Parqueo</a>
+                </Navbar.Brand>
                 <Navbar.Toggle />
               </Navbar.Header>
             </Grid>
@@ -111,33 +110,33 @@ class App extends Component {
             <Row className="row">
               <Col sm={2} md={2} lg={2}>
 
-                <ParkingLot
-                  parkingNumber={this.state.parkingLots[0].parkingNumber}
-                  id={this.state.parkingLots[0]._id}
-                  parkingStatus={this.state.parkingLots[0].parkingStatus}
-                  index={0}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_14].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_14]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_14].parkingStatus}
+                  index={this.parkingNumbers.parking_14}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
 
               </Col >
               <Col sm={2} md={2} lg={2}>
 
-                <ParkingLot
-                  parkingNumber={this.state.parkingLots[1].parkingNumber}
-                  id={this.state.parkingLots[1]._id}
-                  parkingStatus={this.state.parkingLots[1].parkingStatus}
-                  index={1}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_15].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_15]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_15].parkingStatus}
+                  index={this.parkingNumbers.parking_15}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
 
               </Col >
               <Col sm={2} md={2} lg={2}>
 
-              <ParkingLot
-                  parkingNumber={this.state.parkingLots[2].parkingNumber}
-                  id={this.state.parkingLots[2]._id}
-                  parkingStatus={this.state.parkingLots[2].parkingStatus}
-                  index={2}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_16].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_16]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_16].parkingStatus}
+                  index={this.parkingNumbers.parking_16}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
 
@@ -146,22 +145,22 @@ class App extends Component {
               </Col >
               <Col sm={2} md={2} lg={2}>
 
-              <ParkingLot
-                  parkingNumber={this.state.parkingLots[3].parkingNumber}
-                  id={this.state.parkingLots[3]._id}
-                  parkingStatus={this.state.parkingLots[3].parkingStatus}
-                  index={3}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_19].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_19]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_19].parkingStatus}
+                  index={this.parkingNumbers.parking_19}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
-                
+
               </Col >
               <Col sm={2} md={2} lg={2}>
 
-              <ParkingLot
-                  parkingNumber={this.state.parkingLots[4].parkingNumber}
-                  id={this.state.parkingLots[4]._id}
-                  parkingStatus={this.state.parkingLots[4].parkingStatus}
-                  index={4}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_20].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_20]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_20].parkingStatus}
+                  index={this.parkingNumbers.parking_20}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
 
@@ -170,33 +169,33 @@ class App extends Component {
             <Row>
               <Col sm={2} md={2} lg={2}>
 
-              <ParkingLot
-                  parkingNumber={this.state.parkingLots[5].parkingNumber}
-                  id={this.state.parkingLots[5]._id}
-                  parkingStatus={this.state.parkingLots[5].parkingStatus}
-                  index={5}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_29].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_29]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_29].parkingStatus}
+                  index={this.parkingNumbers.parking_29}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
 
               </Col >
               <Col sm={2} md={2} lg={2}>
 
-              <ParkingLot
-                  parkingNumber={this.state.parkingLots[6].parkingNumber}
-                  id={this.state.parkingLots[6]._id}
-                  parkingStatus={this.state.parkingLots[6].parkingStatus}
-                  index={6}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_30].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_30]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_30].parkingStatus}
+                  index={this.parkingNumbers.parking_30}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
 
               </Col >
               <Col sm={2} md={2} lg={2}>
 
-              <ParkingLot
-                  parkingNumber={this.state.parkingLots[7].parkingNumber}
-                  id={this.state.parkingLots[7]._id}
-                  parkingStatus={this.state.parkingLots[7].parkingStatus}
-                  index={7}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_33].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_33]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_33].parkingStatus}
+                  index={this.parkingNumbers.parking_33}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
 
@@ -205,22 +204,22 @@ class App extends Component {
               </Col >
               <Col sm={2} md={2} lg={2}>
 
-              <ParkingLot
-                  parkingNumber={this.state.parkingLots[8].parkingNumber}
-                  id={this.state.parkingLots[8]._id}
-                  parkingStatus={this.state.parkingLots[8].parkingStatus}
-                  index={8}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_34].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_34]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_34].parkingStatus}
+                  index={this.parkingNumbers.parking_34}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
 
               </Col >
               <Col sm={2} md={2} lg={2}>
 
-              <ParkingLot
-                  parkingNumber={this.state.parkingLots[9].parkingNumber}
-                  id={this.state.parkingLots[9]._id}
-                  parkingStatus={this.state.parkingLots[9].parkingStatus}
-                  index={9}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_35].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_35]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_35].parkingStatus}
+                  index={this.parkingNumbers.parking_35}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
 
@@ -228,18 +227,16 @@ class App extends Component {
             </Row>
           </Grid>
 
-
-
           <Grid>
             <h1>Sótano 2</h1>
             <Row className="row">
               <Col sm={2} md={2} lg={2}>
 
-              <ParkingLot
-                  parkingNumber={this.state.parkingLots[10].parkingNumber}
-                  id={this.state.parkingLots[10]._id}
-                  parkingStatus={this.state.parkingLots[10].parkingStatus}
-                  index={10}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_85].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_85]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_85].parkingStatus}
+                  index={this.parkingNumbers.parking_85}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
 
@@ -248,11 +245,11 @@ class App extends Component {
               </Col >
               <Col sm={2} md={2} lg={2}>
 
-              <ParkingLot
-                  parkingNumber={this.state.parkingLots[11].parkingNumber}
-                  id={this.state.parkingLots[11]._id}
-                  parkingStatus={this.state.parkingLots[11].parkingStatus}
-                  index={11}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_89].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_89]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_89].parkingStatus}
+                  index={this.parkingNumbers.parking_89}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
 
@@ -263,11 +260,11 @@ class App extends Component {
             <Row>
               <Col sm={2} md={2} lg={2}>
 
-              <ParkingLot
-                  parkingNumber={this.state.parkingLots[12].parkingNumber}
-                  id={this.state.parkingLots[12]._id}
-                  parkingStatus={this.state.parkingLots[12].parkingStatus}
-                  index={12}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_130].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_130]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_130].parkingStatus}
+                  index={this.parkingNumbers.parking_130}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
 
@@ -276,27 +273,28 @@ class App extends Component {
               </Col >
             </Row>
           </Grid>
+
           <Grid>
             <h1>Sótano 3</h1>
             <Row className="row">
               <Col sm={2} md={2} lg={2}>
 
-              <ParkingLot
-                  parkingNumber={this.state.parkingLots[13].parkingNumber}
-                  id={this.state.parkingLots[13]._id}
-                  parkingStatus={this.state.parkingLots[13].parkingStatus}
-                  index={13}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_257].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_257]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_257].parkingStatus}
+                  index={this.parkingNumbers.parking_257}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
 
               </Col >
               <Col sm={2} md={2} lg={2}>
 
-              <ParkingLot
-                  parkingNumber={this.state.parkingLots[14].parkingNumber}
-                  id={this.state.parkingLots[14]._id}
-                  parkingStatus={this.state.parkingLots[14].parkingStatus}
-                  index={14}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_258].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_258]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_258].parkingStatus}
+                  index={this.parkingNumbers.parking_258}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
 
@@ -307,22 +305,22 @@ class App extends Component {
             <Row>
               <Col sm={2} md={2} lg={2}>
 
-              <ParkingLot
-                  parkingNumber={this.state.parkingLots[15].parkingNumber}
-                  id={this.state.parkingLots[15]._id}
-                  parkingStatus={this.state.parkingLots[15].parkingStatus}
-                  index={15}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_259].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_259]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_259].parkingStatus}
+                  index={this.parkingNumbers.parking_259}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
 
               </Col >
               <Col sm={2} md={2} lg={2}>
 
-              <ParkingLot
-                  parkingNumber={this.state.parkingLots[16].parkingNumber}
-                  id={this.state.parkingLots[16]._id}
-                  parkingStatus={this.state.parkingLots[16].parkingStatus}
-                  index={16}
+                <Parking
+                  parkingNumber={this.state.parkingLots[this.parkingNumbers.parking_260].parkingNumber}
+                  id={this.state.parkingLots[this.parkingNumbers.parking_260]._id}
+                  parkingStatus={this.state.parkingLots[this.parkingNumbers.parking_260].parkingStatus}
+                  index={this.parkingNumbers.parking_260}
                   changeStateParkingLot={this.changeStateParkingLot}
                 />
 
@@ -332,19 +330,13 @@ class App extends Component {
             </Row>
           </Grid>
         </div >
-        // <div className="App">
-        //   <header className="App-header">
-        //     <img src={logo} className="App-logo" alt="logo" />
-        //     <h1 className="App-title">Welcome to parking</h1>
-        //   </header>
-        //   <p className="App-intro">
-        //     To get started, edit <code>src/App.js</code> and save to reload.
-        //   </p>
-        // </div>
       );
     } else {
       return (
-        <div>Hola</div>
+        <div className="App">
+          <img src={Spinner} alt="logo" />
+          {/* <img src={Spinner} className="App-logo" alt="logo" /> */}
+        </div>
       );
     }
   }
