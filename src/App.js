@@ -47,7 +47,7 @@ class App extends Component {
         return result.json();
       }).then((parkingLots) => {
         this.setState({ parkingLots });
-        console.log(this.state.parkingLots);
+        // console.log(this.state.parkingLots);
       });
   }
 
@@ -60,8 +60,6 @@ class App extends Component {
     } else {
       newStatus = "AVAILABLE";
     }
-
-    console.log(this.state.parkingLots);
 
     let parking = this.state.parkingLots;
     parking[index].parkingStatus = newStatus;
@@ -93,7 +91,7 @@ class App extends Component {
             <Grid>
               <Navbar.Header>
                 <Navbar.Brand>
-                  <a href="/">Admin Parqueo</a>
+                  <a>Admin Parqueo</a>
                 </Navbar.Brand>
                 <Navbar.Toggle />
               </Navbar.Header>
