@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 
-import PARKING_LOTS from '../data/parkingLots';
-
 const Parking = (props) => {
-  const [status, setStatus] = useState(PARKING_LOTS[props.id].parkingStatus);
+  const [status, setStatus] = useState(props.status);
   const [bgColor, setBgColor] = useState('success');
 
   const changeParking = (status) => {
@@ -24,7 +22,7 @@ const Parking = (props) => {
       block
       onClick={() => changeParking(status)}
     >
-      {PARKING_LOTS[props.id].parkingNumber}
+      {props.number}
     </Button>
   );
 };

@@ -43,38 +43,68 @@ const App = () => {
           <h1>Sótano 1</h1>
           <Row className='row'>
             <Col sm={2}>
-              <Parking id={0} />
+              <Parking
+                status={parkingLots[0].parkingStatus}
+                number={parkingLots[0].parkingNumber}
+              />
             </Col>
             <Col sm={2}>
-              <Parking id={1} />
+              <Parking
+                status={parkingLots[1].parkingStatus}
+                number={parkingLots[1].parkingNumber}
+              />
             </Col>
             <Col sm={2}>
-              <Parking id={2} />
+              <Parking
+                status={parkingLots[2].parkingStatus}
+                number={parkingLots[2].parkingNumber}
+              />
             </Col>
             <Col sm={2}></Col>
             <Col sm={2}>
-              <Parking id={3} />
+              <Parking
+                status={parkingLots[3].parkingStatus}
+                number={parkingLots[3].parkingNumber}
+              />
             </Col>
             <Col sm={2}>
-              <Parking id={4} />
+              <Parking
+                status={parkingLots[4].parkingStatus}
+                number={parkingLots[4].parkingNumber}
+              />
             </Col>
           </Row>
           <Row>
             <Col sm={2}>
-              <Parking id={5} />
+              <Parking
+                status={parkingLots[5].parkingStatus}
+                number={parkingLots[5].parkingNumber}
+              />
             </Col>
             <Col sm={2}>
-              <Parking id={6} />
+              <Parking
+                status={parkingLots[6].parkingStatus}
+                number={parkingLots[6].parkingNumber}
+              />
             </Col>
             <Col sm={2}>
-              <Parking id={7} />
+              <Parking
+                status={parkingLots[7].parkingStatus}
+                number={parkingLots[7].parkingNumber}
+              />
             </Col>
             <Col sm={2}></Col>
             <Col sm={2}>
-              <Parking id={8} />
+              <Parking
+                status={parkingLots[8].parkingStatus}
+                number={parkingLots[8].parkingNumber}
+              />
             </Col>
             <Col sm={2}>
-              <Parking id={9} />
+              <Parking
+                status={parkingLots[9].parkingStatus}
+                number={parkingLots[9].parkingNumber}
+              />
             </Col>
           </Row>
         </Grid>
@@ -83,17 +113,26 @@ const App = () => {
           <h1>Sótano 2</h1>
           <Row className='row'>
             <Col sm={2}>
-              <Parking id={10} />
+              <Parking
+                status={parkingLots[10].parkingStatus}
+                number={parkingLots[10].parkingNumber}
+              />
             </Col>
             <Col sm={2}></Col>
             <Col sm={2}>
-              <Parking id={11} />
+              <Parking
+                status={parkingLots[11].parkingStatus}
+                number={parkingLots[11].parkingNumber}
+              />
             </Col>
             <Col sm={6} md={6} lg={6}></Col>
           </Row>
           <Row>
             <Col sm={2}>
-              <Parking id={12} />
+              <Parking
+                status={parkingLots[12].parkingStatus}
+                number={parkingLots[12].parkingNumber}
+              />
             </Col>
             <Col sm={10} md={10} lg={10}></Col>
           </Row>
@@ -103,19 +142,31 @@ const App = () => {
           <h1>Sótano 3</h1>
           <Row className='row'>
             <Col sm={2}>
-              <Parking id={13} />
+              <Parking
+                status={parkingLots[13].parkingStatus}
+                number={parkingLots[13].parkingNumber}
+              />
             </Col>
             <Col sm={2}>
-              <Parking id={14} />
+              <Parking
+                status={parkingLots[14].parkingStatus}
+                number={parkingLots[14].parkingNumber}
+              />
             </Col>
             <Col sm={8} md={8} lg={8}></Col>
           </Row>
           <Row>
             <Col sm={2}>
-              <Parking id={15} />
+              <Parking
+                status={parkingLots[15].parkingStatus}
+                number={parkingLots[15].parkingNumber}
+              />
             </Col>
             <Col sm={2}>
-              <Parking id={16} />
+              <Parking
+                status={parkingLots[16].parkingStatus}
+                number={parkingLots[16].parkingNumber}
+              />
             </Col>
             <Col sm={8} md={8} lg={8}></Col>
           </Row>
