@@ -1,21 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 
-const Parking = (props) => {
+import PARKING_LOTS from '../data/parkingLots';
 
-  const changeColor = (status) => {
-    return (status === "AVAILABLE") ? "success" : "danger";
-  }
+const Parking = (props) => {
+  const [status, setStatus] = useState(PARKING_LOTS[props.id].parkingStatus);
+  const [bgColor, setBgColor] = useState('success');
+
+  const changeParking = (status) => {
+    if (status === 'AVAILABLE') {
+      setStatus('NOT_AVAILABLE');
+      setBgColor('danger');
+    } else {
+      setStatus('AVAILABLE');
+      setBgColor('success');
+    }
+  };
 
   return (
     <Button
-      bsStyle={changeColor(props.parkingStatus)}
-      bsSize="large"
+      bsStyle={bgColor}
+      bsSize='large'
       block
-      onClick={() => props.changeStateParkingLot(props.index, props.id, props.parkingStatus)}
-    > {props.parkingNumber}
-    </Button >
+      onClick={() => changeParking(status)}
+    >
+      {PARKING_LOTS[props.id].parkingNumber}
+    </Button>
   );
-}
+};
 
 export default Parking;
