@@ -4,10 +4,10 @@ import React, { useEffect } from 'react';
 import { Grid, Jumbotron, Navbar } from 'react-bootstrap';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
-import Hello from './components/Hello';
-import ParkingLot from './components/ParkingLot';
-import Spinner from './images/Spinner.svg';
-import store from './redux/store';
+import Spinner from '../../images/Spinner.svg';
+import store from '../../redux/store';
+import Hello from '../Hello';
+import ParkingLot from '../ParkingLot';
 
 // import { useSelector } from 'react-redux';
 
@@ -33,11 +33,13 @@ const App = () => {
             <Grid>
               <Navbar.Header>
                 <Navbar.Brand>
-                  <a>Admin Parqueo</a>
+                  <Link to='/'>
+                    <a>Admin Parqueo</a>
+                  </Link>
                 </Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Link>
-                  <Link to='/home'>Home</Link>
+                  <Link to='/hello'>Home</Link>
                 </Navbar.Link>
               </Navbar.Header>
             </Grid>
@@ -49,7 +51,7 @@ const App = () => {
           </Jumbotron>
 
           <Switch>
-            <Route path='/home'>
+            <Route path='/hello'>
               <Hello />
             </Route>
             <Route path='/'>
