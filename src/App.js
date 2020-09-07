@@ -2,16 +2,17 @@ import './App.css';
 
 import React, { useEffect } from 'react';
 import { Col, Grid, Jumbotron, Navbar, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 import Parking from './components/Parking';
-import PARKING_LOTS from './data/parkingLots';
 import Spinner from './images/Spinner.svg';
 
 // import logo from './logo.svg';
 // const backendURL = 'https://parking-back-end.herokuapp.com/api/parking';
 
 const App = () => {
-  let parkingLots = PARKING_LOTS;
+  // let parkingLots = PARKING_LOTS;
+  let parkingLots = useSelector((state) => state.parkings.parkingLots);
   useEffect(() => {
     getParkingLots();
   });
@@ -125,7 +126,7 @@ const App = () => {
                 number={parkingLots[11].parkingNumber}
               />
             </Col>
-            <Col sm={6} md={6} lg={6}></Col>
+            <Col sm={6}></Col>
           </Row>
           <Row>
             <Col sm={2}>
@@ -134,7 +135,7 @@ const App = () => {
                 number={parkingLots[12].parkingNumber}
               />
             </Col>
-            <Col sm={10} md={10} lg={10}></Col>
+            <Col sm={10}></Col>
           </Row>
         </Grid>
 
@@ -153,7 +154,7 @@ const App = () => {
                 number={parkingLots[14].parkingNumber}
               />
             </Col>
-            <Col sm={8} md={8} lg={8}></Col>
+            <Col sm={8}></Col>
           </Row>
           <Row>
             <Col sm={2}>
@@ -168,7 +169,7 @@ const App = () => {
                 number={parkingLots[16].parkingNumber}
               />
             </Col>
-            <Col sm={8} md={8} lg={8}></Col>
+            <Col sm={8}></Col>
           </Row>
         </Grid>
       </div>
